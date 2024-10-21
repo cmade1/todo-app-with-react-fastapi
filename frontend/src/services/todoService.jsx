@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://todo-app-with-react-fastapi.onrender.com/";
 
 export const todoService = {
   getAllTodos: async () => {
