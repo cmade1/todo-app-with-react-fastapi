@@ -13,7 +13,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://cmade1.github.io"],
+    allow_origins=["https://cmade1.github.io/todo-app-with-react-fastapi/"],
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*'],
