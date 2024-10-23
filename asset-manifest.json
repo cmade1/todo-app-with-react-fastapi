@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/todo-app-with-react-fastapi/static/css/main.1bc11230.css",
-    "main.js": "/todo-app-with-react-fastapi/static/js/main.99fb134a.js",
+    "main.js": "/todo-app-with-react-fastapi/static/js/main.f8214093.js",
     "index.html": "/todo-app-with-react-fastapi/index.html",
     "main.1bc11230.css.map": "/todo-app-with-react-fastapi/static/css/main.1bc11230.css.map",
-    "main.99fb134a.js.map": "/todo-app-with-react-fastapi/static/js/main.99fb134a.js.map"
+    "main.f8214093.js.map": "/todo-app-with-react-fastapi/static/js/main.f8214093.js.map"
   },
   "entrypoints": [
     "static/css/main.1bc11230.css",
-    "static/js/main.99fb134a.js"
+    "static/js/main.f8214093.js"
   ]
 }
