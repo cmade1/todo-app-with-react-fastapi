@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { todoService } from "../services/todoService";
+import { toast } from "react-toastify";
 
 const ListTodo = ({ todos, fetchTodos, setTodos }) => {
   return (
@@ -20,6 +21,8 @@ const ListTodo = ({ todos, fetchTodos, setTodos }) => {
 export default ListTodo;
 
 function ListItem({ todo, fetchTodos, todos, setTodos }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const toggleTodo = async (id) => {
     try {
       const updatedTodo = await todoService.toggleTodo(id);
@@ -42,12 +45,17 @@ function ListItem({ todo, fetchTodos, todos, setTodos }) {
     }
   };
 
-  const updateTodo = async (id, title) => {
+  const handleSave = async (id, title) => {
     try {
+      setIsLoading(true);
       await todoService.updateTodo(id, title);
+      toast.success("Todo succesfully updated!", toastConfig);
       await fetchTodos();
     } catch (error) {
       console.error("Error updating todo:", error);
+      toast.error("Error updating todo", toastConfig);
+    } finally {
+      setIsLoading(false);
     }
   };
   const [text, setText] = useState(todo.title);
@@ -77,9 +85,19 @@ function ListItem({ todo, fetchTodos, todos, setTodos }) {
         <div className="flex justify-start sm:justify-end gap-2 items-center">
           <button
             className="bg-blue-900 rounded-lg text-white text-lg font-medium cursor-pointer px-3 py-1"
-            onClick={() => updateTodo(todo.id, text)}
+            onClick={() => handleSave(todo.id, text)}
           >
-            Save
+            {isLoading ? (
+              <div
+                className="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500"
+                role="status"
+                aria-label="loading"
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+            ) : (
+              "Save"
+            )}
           </button>
           <button
             className="bg-red-600 rounded-lg text-white text-lg font-medium cursor-pointer px-3 py-1"
@@ -92,3 +110,13 @@ function ListItem({ todo, fetchTodos, todos, setTodos }) {
     </div>
   );
 }
+
+const toastConfig = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+};

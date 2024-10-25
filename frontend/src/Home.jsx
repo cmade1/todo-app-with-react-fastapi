@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ListTodo from "./components/ListTodo";
 import Create from "./components/Create";
 import { todoService } from "./services/todoService";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [todos, setTodos] = useState([]);
@@ -27,23 +29,28 @@ const Home = () => {
       console.error("Error creating todo:", error);
     }
   };
-
   useEffect(() => {
     fetchTodos();
   }, []);
 
   return (
-    <div className="bg-gray-600 w-full max-w-2xl p-7 min-h-[550px] rounded-2xl">
-      <h1 className="text-4xl font-semibold mb-6 text-white"> 📝 To-Do List</h1>
-      <Create
-        handleNewTodo={handleNewTodo}
-        todos={todos}
-        setTodos={setTodos}
-        setValue={setValue}
-        value={value}
-      />
-      <ListTodo todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
-    </div>
+    <>
+      <div className="bg-gray-600 w-full max-w-2xl p-7 min-h-[550px] rounded-2xl">
+        <h1 className="text-4xl font-semibold mb-6 text-white">
+          {" "}
+          📝 To-Do List
+        </h1>
+        <Create
+          handleNewTodo={handleNewTodo}
+          todos={todos}
+          setTodos={setTodos}
+          setValue={setValue}
+          value={value}
+        />
+        <ListTodo todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
+      </div>
+      <ToastContainer />
+    </>
   );
 };
 
